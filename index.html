@@ -28,8 +28,6 @@
         </div>
     </header>
 
-
-    <!-- БЛОК КЛИЕНТОВ -->
     <h3>Клиент</h3>
     <div class="client-area">
         <div class="flex-client">
@@ -49,7 +47,6 @@
         </div>
     </div>
 
-    <!-- ПРОЕКТ -->
     <h3>Параметры сцены</h3>
     <div class="row">
         <div class="field">
@@ -68,19 +65,11 @@
         </div>
     </div>
 
-     <h3>Реквизиты и контакты</h3>
-    <div class="row">
-      <div class="field">
-        <label>Компания</label>
-        <input id="companyName" placeholder="ООО Ромашка">
-      </div>
-      <div class="field">
-        <label>Контакты</label>
-        <input id="companyContacts" placeholder="+7..., sales@...">
-      </div>
+    <div class="action-group">
+      <button id="openCompanyModalBtn" class="btn-secondary">Реквизиты компании</button>
     </div>
-	
-	<h3>Калькуляция</h3>
+
+    <h3>Калькуляция</h3>
     <div class="row">
         <div class="field small">
             <label>Цена за модуль (₽)</label>
@@ -96,11 +85,8 @@
         <button id="calcBtn" class="btn-primary">Рассчитать смету</button>
         <button id="saveOrderBtn" class="btn-success">Сохранить заказ</button>
         <button id="downloadPdfBtn" class="btn-secondary">Скачать PDF</button>
-		<button id="installBtn" class="btn-primary" style="display:none">
-    Установить приложение
-</button>
+		<button id="installBtn" class="btn-primary" style="display:none">Установить приложение</button>
     </div>
-
 
     <div class="action-group">
       <button id="exportDataBtn" class="btn-secondary">Экспорт JSON</button>
@@ -117,19 +103,34 @@
       </div>
     </div>
 
-    <!-- РЕЗУЛЬТАТ РАСЧЁТА -->
     <div id="result" class="result-card"></div>
 
-    <!-- СОХРАНЁННЫЕ ЗАКАЗЫ -->
     <h3>История заказов</h3>
     <div id="orders" class="orders-list"></div>
 </div>
 
-<!-- Скрытый блок для генерации PDF (содержимое сметы) -->
 <div id="pdfContent" style="display:none;">
     <h2>СМЕТА / КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ</h2>
     <div id="pdfData"></div>
     <p style="margin-top: 30px; font-size: 11px; color: #666;">FEG Stage — профессиональный расчёт сцены</p>
+</div>
+
+<div id="companyModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h3>Реквизиты компании</h3>
+    <div class="field">
+      <label>Компания</label>
+      <input id="companyName" placeholder="ООО Ромашка">
+    </div>
+    <div class="field" style="margin-top:10px;">
+      <label>Контакты</label>
+      <input id="companyContacts" placeholder="+7..., sales@...">
+    </div>
+    <div class="action-group" style="margin-top:14px;">
+      <button id="saveCompanySettingsBtn" class="btn-primary">Сохранить</button>
+      <button id="closeCompanyModalBtn" class="btn-secondary">Закрыть</button>
+    </div>
+  </div>
 </div>
 
 <script src="app.js"></script>
