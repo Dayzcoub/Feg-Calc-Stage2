@@ -1,109 +1,102 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>FEG Stage PRO — Калькулятор сцены</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>FEG Stage PRO — Калькулятор сцены</title>
 
-    <!-- Библиотеки для PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- PDF libs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-    <link rel="stylesheet" href="styles.css">
-	<!-- PWA -->
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#3b82f6">
-<link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#3b82f6" />
+  <link rel="apple-touch-icon" href="icon-180.png" />
 </head>
 <body>
-
-<div class="app-container">
+  <div class="app-container">
     <header class="hero">
-        <div class="logo" aria-hidden="true">
-            <img src="icon-192.png" alt="Логотип FEG Stage">
-        </div>
-        <div class="hero-copy">
-            <h1>FEG Stage PRO</h1>
-            <p>Калькулятор сценических конструкций</p>
-        </div>
+      <div class="logo" aria-hidden="true">
+        <img src="icon-192.png" alt="Логотип FEG Stage" />
+      </div>
+      <div class="hero-copy">
+        <h1>FEG Stage PRO</h1>
+        <p>Калькулятор сценических конструкций</p>
+      </div>
     </header>
 
-
-    <!-- БЛОК КЛИЕНТОВ -->
     <h3>Клиент</h3>
     <div class="client-area">
-        <div class="flex-client">
-            <div class="field" style="flex:3">
-                <label>Имя нового клиента</label>
-                <input id="clientName" type="text" placeholder="Например: ООО Арена">
-            </div>
-            <div class="field" style="flex:1">
-                <label>&nbsp;</label>
-                <button onclick="addClient()" class="btn-secondary">Добавить</button>
-            </div>
+      <div class="flex-client">
+        <div class="field" style="flex:3">
+          <label>Имя нового клиента</label>
+          <input id="clientName" type="text" placeholder="Например: ООО Арена" />
         </div>
-        <div class="client-select-block">
-            <label>Выбрать клиента</label>
-            <select id="clientSelect"></select>
-            <div class="hint">Клиент автоматически подставится в смету</div>
+        <div class="field" style="flex:1">
+          <label>&nbsp;</label>
+          <button id="addClientBtn" class="btn-secondary">Добавить</button>
         </div>
+      </div>
+
+      <div class="client-select-block">
+        <label>Выбрать клиента</label>
+        <select id="clientSelect"></select>
+        <div class="hint">Клиент автоматически подставится в смету</div>
+      </div>
     </div>
 
-    <!-- ПРОЕКТ -->
     <h3>Параметры сцены</h3>
     <div class="row">
-        <div class="field">
-            <label>Название проекта</label>
-            <input id="projectName" placeholder="Фестиваль, концерт, шоу">
-        </div>
+      <div class="field">
+        <label>Название проекта</label>
+        <input id="projectName" placeholder="Фестиваль, концерт, шоу" />
+      </div>
     </div>
+
     <div class="row">
-        <div class="field small">
-            <label>Ширина (модули)</label>
-            <input id="width" type="number" value="4" step="1">
-        </div>
-        <div class="field small">
-            <label>Глубина (модули)</label>
-            <input id="depth" type="number" value="3" step="1">
-        </div>
+      <div class="field small">
+        <label>Ширина (модули)</label>
+        <input id="width" type="number" value="4" step="1" />
+      </div>
+      <div class="field small">
+        <label>Глубина (модули)</label>
+        <input id="depth" type="number" value="3" step="1" />
+      </div>
     </div>
 
     <h3>Калькуляция</h3>
     <div class="row">
-        <div class="field small">
-            <label>Цена за модуль (₽)</label>
-            <input id="priceModule" type="number" value="850" step="50">
-        </div>
-        <div class="field small">
-            <label>Монтаж (₽)</label>
-            <input id="install" type="number" value="3500" step="500">
-        </div>
+      <div class="field small">
+        <label>Цена за модуль (₽)</label>
+        <input id="priceModule" type="number" value="850" step="50" />
+      </div>
+      <div class="field small">
+        <label>Монтаж (₽)</label>
+        <input id="install" type="number" value="3500" step="500" />
+      </div>
     </div>
 
     <div class="action-group">
-        <button onclick="calc()" class="btn-primary">Рассчитать смету</button>
-        <button onclick="saveOrder()" class="btn-success">Сохранить заказ</button>
-        <button onclick="generatePDF()" class="btn-secondary">Скачать PDF</button>
-		<button id="installBtn" class="btn-primary" style="display:none">
-    Установить приложение
-</button>
+      <button id="calcBtn" class="btn-primary">Рассчитать смету</button>
+      <button id="saveOrderBtn" class="btn-success">Сохранить заказ</button>
+      <button id="downloadPdfBtn" class="btn-secondary">Скачать PDF</button>
+      <button id="installBtn" class="btn-primary" style="display:none">Установить приложение</button>
     </div>
 
-    <!-- РЕЗУЛЬТАТ РАСЧЁТА -->
     <div id="result" class="result-card"></div>
 
-    <!-- СОХРАНЁННЫЕ ЗАКАЗЫ -->
     <h3>История заказов</h3>
     <div id="orders" class="orders-list"></div>
-</div>
+  </div>
 
-<!-- Скрытый блок для генерации PDF (содержимое сметы) -->
-<div id="pdfContent" style="display:none;">
+  <!-- hidden PDF area -->
+  <div id="pdfContent" style="display:none;">
     <h2>СМЕТА / КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ</h2>
     <div id="pdfData"></div>
-    <p style="margin-top: 30px; font-size: 11px; color: #666;">FEG Stage — профессиональный расчёт сцены</p>
-</div>
+    <p style="margin-top:30px;font-size:11px;color:#666;">FEG Stage — профессиональный расчёт сцены</p>
+  </div>
 
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
